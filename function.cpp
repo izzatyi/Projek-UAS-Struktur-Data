@@ -610,10 +610,19 @@ class TokoOnline {
         }
         void tampilkanRiwayatPembayaran() {
             system("cls");
-            cout << string(75, '=') << endl;
+            cout << string(65, '=') << endl;
             cout << "                      RIWAYAT PEMBAYARAN                         " << endl;
-            cout << string(75, '=') << endl;
-
+            cout << string(65, '=') << endl;
+        
+            if (riwayatPembayaran.empty()) { // Memeriksa apakah riwayat pembayaran kosong
+                cout << "Belum ada riwayat pembayaran yang tersedia." << endl;
+                cout << string(65, '=') << endl;
+                cout << "Tekan ENTER untuk kembali ke menu utama..." << endl;
+                cin.ignore();
+                cin.get();
+                return; // Kembali ke menu utama
+            }
+        
             int noPembayaran = 1;
             for (const auto &item : riwayatPembayaran) {
                 double totalHarga = get<1>(item);
@@ -624,12 +633,12 @@ class TokoOnline {
                 cout << "[Lihat Detail]" << endl;
                 cout << endl;
             }
-
-            cout << string(75, '=') << endl;
+        
+            cout << string(65, '=') << endl;
             cout << "Masukkan nomor pembayaran yang ingin dilihat detailnya,\natau tekan 0 untuk kembali ke menu utama: ";
             int pilihan;
             cin >> pilihan;
-
+        
             if (pilihan > 0 && pilihan <= riwayatPembayaran.size()) {
                 tampilkanDetailPembayaran(pilihan - 1);  // Menampilkan detail pembayaran yang dipilih
             } else if (pilihan == 0) {
